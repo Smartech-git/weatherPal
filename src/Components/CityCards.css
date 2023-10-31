@@ -1,0 +1,61 @@
+.cityCards {
+    height: 200px;
+    width: 300px;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    position: relative;
+}
+
+.cityCards > div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color:  rgba(0,0,0, 40%);
+    padding: 20px;
+    box-sizing: border-box;
+}
+.cityCardsHeader {
+    width: 100%;
+    height: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cityCardsHeader > span {
+    text-align: center;
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #FFF;
+}
+
+.cityCardsHeader > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cityCardsHeader > div > img {
+    width: 26px;
+    height: 26px;
+}
+
+.cityCardsHeader > div > span {
+    text-align: center;
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(225, 225, 225, 70%);
+    margin-top: 5px;
+}
+
+.cityCardsHeaderWeather {
+    width: 130px;
+    height: 100px;
+    background-color: rgba(0,0, 0, 50%);
+    position: absolute;
+    bottom: 20px;
+    border-radius: 10px;
+}
