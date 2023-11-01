@@ -40,14 +40,14 @@ export default function ThemeSetMobile() {
             let newSettings = {
                 theme: "Auto"
             }
-            setSettings("theme", newSettings)
+            setSettings("settings", newSettings)
         }
 
         if(theme === 'DARK'){
             let newSettings = {
                 theme: "Dark"
             }
-            setSettings("theme", newSettings)
+            setSettings("settings", newSettings)
             const action = {
                 type: actionTypes.setTheme,
                 theme: 'Dark'
@@ -59,7 +59,7 @@ export default function ThemeSetMobile() {
             let newSettings = {
                 theme: "Light"
             }
-            setSettings("theme", newSettings)
+            setSettings("settings", newSettings)
             const action = {
                 type: actionTypes.setTheme,
                 theme: 'Light'

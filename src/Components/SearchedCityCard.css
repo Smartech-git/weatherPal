@@ -1,0 +1,114 @@
+.searchedCityCard {
+    width: 100%;
+    min-height: 60vh;
+    margin-top: 20px;
+    border-radius: 20px;
+}
+
+
+.searchedCityCard-header {
+    width: 100%;
+    height: fit-content
+}
+
+.searchedCityCard-content {
+    margin-top: 10px;
+    width: 100%;
+    height: 70vh;
+    border-radius: 20px;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.searchedCityCard-content > div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0, 10%);
+    padding: 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cityCardContent-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.cityCardContent-header span {
+    text-align: center;
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(225, 225, 225, 70%);
+}
+.content-temp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.content-temp > p:nth-child(1) {
+    text-align: center;
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 68px;
+    font-weight: 400;
+    color: rgba(225, 225, 225, 100%);
+    line-height: 0;
+}
+.content-temp > p:nth-child(2) {
+    text-align: center;
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(225, 225, 225, 70%);
+    line-height: 0px;
+    margin-top: -5px;
+}
+
+.content-bottom {
+    width: 100%;
+    background-color: red;
+    display: flex;
+    align-items: flex-start;
+}
+
+.content-cityName {
+    width: 300px;
+    height: 150px;
+    background-color:  rgba(225,225,225,8%);
+    border-radius: 10px;
+    backdrop-filter: blur(2px);
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.content-cityName > p {
+    text-align: center;
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 34px;
+    font-weight: 400;
+    color: rgba(225, 225, 225, 100%);
+    line-height: 0px;
+}
+
+.content-cityName > span {
+    text-align: center;
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(225, 225, 225, 50%);
+    line-height: 0px;
+    margin-top: 20px;
+}

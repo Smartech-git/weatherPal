@@ -1,20 +1,20 @@
 .cityCards {
     height: 250px;
     min-width: 300px;
-    border-radius: 10px;
+    border-radius: 20px;
     overflow: hidden;
     position: relative;
     flex: 1;
     opacity: 0;
     transform: translateY(30px);
-    border: 2px solid rgba(225,225,225, 0%);
+    border: 3px solid rgba(225,225,225, 0%);
     transition: border 0.5s ease;
     cursor: pointer;
 }
 
 .cityCards:hover {
     transform: border 0.5s ease;
-    border: 2px solid rgba(139, 61, 255, 50%);
+    border: 3px solid rgba(139, 61, 255, 50%);
 }
 
 .cityCards_true{
@@ -40,7 +40,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    padding: 10px;
+    padding: 5px;
 }
 .cityCardsHeader {
     width: 100%;
@@ -64,8 +64,9 @@
 }
 
 .cityCardsWeatherIcon > img {
-    width: 20px;
-    height: 20px;
+    width: 36px;
+    height: 36px;
+    border-radius: 5px
 }
 
 .cityCardsHeader > div > span {

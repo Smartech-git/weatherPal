@@ -5,7 +5,6 @@ import {ReactComponent as TextSearch} from '../Assets/Text-search.svg';
 import {ReactComponent as ArrowLeft} from '../Assets/ArrowLeft.svg';
 import {ReactComponent as ArrowRight} from '../Assets/ArrowRight.svg';
 import Ripples from 'react-ripples';
-import { getWordContents} from '../APIs';
 import {useStateValue} from '../StateProvider';
 import {actionTypes} from '../Reducer'
 
@@ -112,7 +111,7 @@ function SearchBar(props) {
 
     return (
             <div className="SearchBarContainer" style={{backgroundColor: state.themeHue.primary}}>
-                <div className={`ArrowRipple ${leftArrowActive}`}>
+                <div className={`ArrowRipple`}>
                     <Ripples color={'rgba(0,0,0, 0.15)'}>
                         <div style={{backgroundColor: state.themeHue.primary_light}} className={`ArrowLeftPadding ArrowIcons-${state.theme}`}>
                             <ArrowLeft width ='18'/>
@@ -133,7 +132,7 @@ function SearchBar(props) {
                         </Ripples>
                     </div>
                 </div>
-                <div className={`ArrowRipple ${rightArrowActive}`}>
+                <div className={`ArrowRipple`}>
                     <Ripples>
                         <div style={{backgroundColor: state.themeHue.primary_light}}  className={`ArrowRightPadding ArrowIcons-${state.theme}`}>
                             <ArrowRight width="18"/>

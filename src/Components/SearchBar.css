@@ -56,10 +56,9 @@
     -moz-user-select: none; 
     -ms-user-select: none; 
     user-select: none; 
+    width: fit-content;
 }
-.false {
-    opacity: 0.5;
-}
+
 .SearchRipple {
     border-radius: 50px;
     height: 36px;

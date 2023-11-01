@@ -8,52 +8,45 @@ import { useThemeDetector } from './CustomHooks/useThemeDetector';
 import ThemeSetMobile from './Components/ThemeSetMobile/ThemeSetMobile';
 import { useStateValue } from './StateProvider';
 import CityCards from './Components/CityCards';
-import axios from 'axios';
-import { cities } from './APIs';
+import { getHighlightsWeatherData } from './APIs';
 import cancel_dark from '../src/Assets/cancel_dark.png'
 import cancel_light from '../src/Assets/cancel_light.png'
+import SearchedCityCard from './Components/SearchedCityCard';
 
-// localStorage.clear()
+//localStorage.clear()
 function Home(props) {
     const [state, dispatch] = useStateValue();
     const isDarkTheme = useThemeDetector();
     const [data, setData] = useState(undefined)
-    const [fav, setFav] = useState([...Array(10)].map((a, b) => b))
+    const [fav, setFav] = useState([])
+    const [highlights, setHighlights] = useState([])
+    const [viewMore, setViewMore] = useState(false)
+
+    useEffect(() => {
+        let arr = getSettings('highlights').highlights
+        arr.sort((a, b) => {
+            const A = a.request.query.toUpperCase();
+            const B = b.request.query.toUpperCase();
+          
+            if (A < B) {
+              return -1;
+            }
+            if (A > B) {
+              return 1;
+            }
+            return 0;
+          });     
+        console.log(arr)
+          setHighlights(arr)
+    }, [])
 
     useEffect(()=> {
-        // let citiesData = []
-        // cities.forEach((city) => {
-        //     let data = {}
-        //     const params = {
-        //     key: 'e724a77e072d428ea6a21539233010',
-        //     q: city,
-        //     format: 'json'
-        //     }
-            
-        //     axios.get(' https://api.worldweatheronline.com/premium/v1/weather.ashx', {params})
-        //     .then(response => {
-        //         const apiResponse = response.data.data;
-        //         data = {
-        //         current_condition: apiResponse.current_condition[0],
-        //         request: apiResponse.request[0],
-        //         weather: apiResponse.weather[0]
-        //         }
-        //         citiesData.push(data)
-        //     }).catch(error => {
-        //         console.log(error);
-        //     })
-        // })
-
-        // setData(citiesData)
-        let x =  localStorage.getItem("favourites")
-        console.log(x)
         if(localStorage.getItem("favourites") === null ){
-            let param = {
-                favourites: []
-            }
-            setSettings("favourites", param);
+            let favourites = []
+            setSettings("favourites", favourites);
         } else {
              let data = getSettings('favourites')
+             console.log(data)
             setFav(data);
         }
     }, [])
@@ -101,6 +94,10 @@ function Home(props) {
         setSettings("favourites", [])
     }
 
+    const handleViewMore = () => {
+
+    }
+
     return (
         <div style={{backgroundColor: state.themeHue.primary, width: '100%'}}>
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
@@ -115,15 +112,16 @@ function Home(props) {
                         </div>
                         <div className="favouriteCities-remove" onClick={handleClearAllFavourites}  style={{backgroundColor: state.themeHue.primary}}>
                             {state.theme === 'Light' ? (
-                                <img src={cancel_light}/>
+                                <img src={cancel_light} alt="icon"/>
                             ) : (
-                                <img src={cancel_dark}/>
+                                <img src={cancel_dark} alt="icon"/>
                             )}
                         </div>
                      </div>
                    
                     <div className='favourite-content'>
                         {
+                            fav.length > 0 && (
                             fav.map((item, index) => {
                                 return (
                                    <div className='favouriteCities' key ={index}>
@@ -132,46 +130,44 @@ function Home(props) {
                                         </div> 
                                         <div className="favouriteCities-remove" onClick={() => handleFavouriteDeletion(item)} style={{backgroundColor: state.themeHue.primary}}>
                                             {state.theme === 'Light' ? (
-                                                <img src={cancel_light}/>
+                                                <img src={cancel_light} alt="icon"/>
                                             ) : (
-                                                <img src={cancel_dark}/>
+                                                <img src={cancel_dark} alt="icon"/>
                                             )}
                                         </div>
                                     </div> 
                                 )
                             })
+                            )
                         }
                         
                     </div>
                 </div>
-                <div className='highlights' style={{borderColor: state.themeHue.secondary_light}}>
-                    <div className = "highlightsHeader" style={{backgroundColor: state.themeHue.primary_light}}>
-                        <span style={{color: state.themeHue.base}}>Highlights</span>
-                        <span>&#127775;</span>
-                    </div>
-                    <div>
-                        {/* {
-                           data === undefined ?
-                            (
-                                <div></div>
-                            ):(
-                                data.map((city, index) => {
-                                    console.log(city)
-                                    return (
-                                        <CityCards/>
-                                    )
-                                })
-                            )
-                        } */}
-                        <CityCards fav = {fav} city="Tokyo" setFav={setFav}/>
-                        <CityCards fav = {fav} city="Beijing" setFav={setFav}/>
-                        <CityCards fav = {fav} city ="Paris" setFav={setFav}/>
-                        <CityCards fav = {fav} city = "New york" setFav={setFav}/>
-                        <CityCards fav = {fav} city="Owerri" setFav={setFav}/>
-                        <CityCards fav = {fav} city="London" setFav={setFav}/>
-                        <CityCards fav = {fav} city="France" setFav={setFav}/>
-                    </div>
-                </div>
+                { !viewMore ? (
+                    <div className='highlights' style={{borderColor: state.themeHue.secondary_light}}>
+                        <div className = "highlightsHeader" style={{backgroundColor: state.themeHue.primary_light}}>
+                            <span style={{color: state.themeHue.base}}>Highlights</span>
+                            <span>&#127775;</span>
+                        </div>
+                        <div>
+                            { highlights.map((item, index) => {
+                                return (
+                                    <CityCards setViewMore={setViewMore} key={index} fav = {fav} setFav={setFav} data={item}/>
+                                )
+                            })}
+                            {/* <CityCards fav = {fav} city="Tokyo" setFav={setFav}/>
+                            <CityCards fav = {fav} city="Beijing" setFav={setFav}/>
+                            <CityCards fav = {fav} city ="Paris" setFav={setFav}/>
+                            <CityCards fav = {fav} city = "New york" setFav={setFav}/>
+                            <CityCards fav = {fav} city="Owerri" setFav={setFav}/>
+                            <CityCards fav = {fav} city="London" setFav={setFav}/>
+                            <CityCards fav = {fav} city="France" setFav={setFav}/> */}
+                        </div>
+                    </div> 
+                    ) : (
+                       <SearchedCityCard setViewMore={setViewMore}/> 
+                    )
+                }
             </div>
             <ThemeSetMobile/>
         </div>

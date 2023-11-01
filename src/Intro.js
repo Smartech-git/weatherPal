@@ -14,7 +14,7 @@ function Intro() {
     const isDarkTheme = useThemeDetector();
 
     useEffect(() =>{
-        let settings = getSettings()
+        let settings = getSettings("settings")
         console.log(settings)
 
         if(settings.theme === "Auto"){

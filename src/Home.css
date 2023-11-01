@@ -1,7 +1,7 @@
 .homeInnerContent {
     width: 80%;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
 }
 
 .homeInnerContent-favourite {
@@ -28,7 +28,7 @@
 
 
 
-.favourite-header span, .highlightsHeader span {
+.favourite-header > span, .highlightsHeader > span {
     text-align: center;
     font-family: 'Mochiy Pop One', sans-serif;
     font-size: 14px;

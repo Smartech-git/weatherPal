@@ -55,32 +55,80 @@ export const getSettings = (param) => {
   
 }
 
-export const getLocationdata = async (param) => {
-  
-  let citiesData = []
-  cities.forEach((city) => {
-    let data = {}
-    const params = {
-      key: 'e724a77e072d428ea6a21539233010',
-      q: city,
-      format: 'json'
-    }
-    
-    axios.get(' https://api.worldweatheronline.com/premium/v1/weather.ashx', {params})
-      .then(response => {
-        const apiResponse = response.data.data;
-        data = {
-          current_condition: apiResponse.current_condition[0],
-          request: apiResponse.request[0],
-          weather: apiResponse.weather[0]
-        }
-        citiesData.push(data)
-      }).catch(error => {
-        console.log(error);
-      })
-  })
+export const citiesData = []
+// export const getHighlightsWeatherData = async (param) => {
 
-  param(citiesData)
+  if(getSettings("highlights") === null ){
+    console.log("active") 
+    cities.forEach((city) => {
+      const params = {
+        key: process.env.REACT_APP_WEATHERSTACK_API_KEY,
+        q: city,
+        format: 'json'
+      }
+      
+      axios.get(' https://api.worldweatheronline.com/premium/v1/weather.ashx', {params})
+        .then(response => {
+          const apiResponse = response.data.data;
+          let data = {
+            current_condition: apiResponse.current_condition[0],
+            request: apiResponse.request[0],
+            weather: apiResponse.weather[0]
+          }
+          if(getSettings("highlights") === null){
+            let newSetting = {
+              highlights: [data]
+            };
+            setSettings("highlights", newSetting)
+          }else {
+            console.log("adding")
+            let x = getSettings("highlights")
+            let newSetting = {
+              highlights: [ ...x.highlights, data]
+            }
+            setSettings("highlights", newSetting)
+          }
+        }).catch(error => {
+          console.log(error);
+        })
+    })
+    // console.log(citiesData)
+    // param(citiesData)
+    // let data = {
+    //   highlights: citiesData 
+    // }
+    // setSettings('highlights', data)
+  } else {
+    // let data = getSettings("highlights")
+    // param(data.highlights)
+  }
+
+// export const getLocationdata = async (param) => {
+  
+//   let citiesData = []
+//   cities.forEach((city) => {
+//     let data = {}
+//     const params = {
+//       key: 'e724a77e072d428ea6a21539233010',
+//       q: city,
+//       format: 'json'
+//     }
+    
+//     axios.get(' https://api.worldweatheronline.com/premium/v1/weather.ashx', {params})
+//       .then(response => {
+//         const apiResponse = response.data.data;
+//         data = {
+//           current_condition: apiResponse.current_condition[0],
+//           request: apiResponse.request[0],
+//           weather: apiResponse.weather[0]
+//         }
+//         citiesData.push(data)
+//       }).catch(error => {
+//         console.log(error);
+//       })
+//   })
+
+//   param(citiesData)
      
 
-}
+// }
