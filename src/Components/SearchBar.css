@@ -2,6 +2,12 @@
     display: flex;
     margin-top: 10px;
     align-items: center;
+    position: sticky;
+    top: 10px;
+    z-index: 10;
+    background-color: red;
+    padding: 20px;
+    border-radius: 10px;
 }
 .ArrowLeftPadding, .ArrowRightPadding {
     background-color: #F3F5F7;

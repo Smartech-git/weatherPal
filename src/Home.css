@@ -1,14 +1,20 @@
 .homeInnerContent {
     width: 80%;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .homeInnerContent-favourite {
-    height: 150px;
     border-radius: 20px;
     width: 100%;
-    padding: 10px;
+    padding: 20px;
     box-sizing: border-box;
+}
+
+.homeInnerContent-favourite > div:nth-child(1) {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .favourite-header, .highlightsHeader {
@@ -25,49 +31,92 @@
 .favourite-header span, .highlightsHeader span {
     text-align: center;
     font-family: 'Mochiy Pop One', sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
     
 }
-.favourite-header span:nth-child(2){
+.favourite-header span:nth-child(2), .highlightsHeader span:nth-child(2){
     margin-left: 10px;
 }
 
-.highlightsHeader span {
-    color: #8B3DFF
+.highlights {
+    min-height: 50vh;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .favourite-content {
     display: flex;
     flex-direction: row;
-    margin-top: 10px;
+    margin-top: 20px;
     width: 100%;
-    height: 90px;
-    gap: 10px;
+    height: fit-content;
+    column-gap: 5px;
+    row-gap: 10px;
+    animation: spread 0.6s ease 1s forwards;
+    opacity: 0;
+    overflow-x: scroll;
 }
 
-.favourite-content div {
-    width: 100px;
+@keyframes spread {
+    to{
+        column-gap: 10px;
+        opacity: 1;
+    }
+}
+
+.favouriteCities {
+    background-color: rgba(139, 61, 255, 40%);
+    border-radius: 50px;
+    padding: 0px 10px 0px 14px;;
+    display: flex;
+    box-sizing: border-box;
+    height: 50px;
+    align-items: center;
+}
+.favouriteCities-lookup {
+    text-align: center;
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
     height: 100%;
-    background-color: rgba(225, 225, 225, 50%);
-    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.favouriteCities-remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    margin-left: 20px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.favouriteCities-remove > img {
+    width: 16px;
+    height: 16px;
 }
 
 .highlights {
     width:100%;
     margin-top: 20px;
-    border-radius: 20px;
+    /* border-radius: 20px;
     border-style: solid;
     border-width: 1px;
-    padding: 10px;
+    padding: 20px; */
     box-sizing: border-box;
-    height: fit-content;
 }
 
-.highlights > div{
-    margin-top: 10px;
-}
 
-.highlightsHeader {
-
+.highlights > div:nth-child(2) {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
 }

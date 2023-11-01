@@ -1,20 +1,46 @@
 .cityCards {
-    height: 200px;
-    width: 300px;
+    height: 250px;
+    min-width: 300px;
     border-radius: 10px;
-    background-repeat: no-repeat;
-    background-size: cover;
     overflow: hidden;
     position: relative;
+    flex: 1;
+    opacity: 0;
+    transform: translateY(30px);
+    border: 2px solid rgba(225,225,225, 0%);
+    transition: border 0.5s ease;
+    cursor: pointer;
 }
 
+.cityCards:hover {
+    transform: border 0.5s ease;
+    border: 2px solid rgba(139, 61, 255, 50%);
+}
+
+.cityCards_true{
+    animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 .cityCards > div {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color:  rgba(0,0,0, 40%);
     padding: 20px;
     box-sizing: border-box;
+}
+
+.cityCardsWeatherIcon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 10px;
 }
 .cityCardsHeader {
     width: 100%;
@@ -26,7 +52,7 @@
 .cityCardsHeader > span {
     text-align: center;
     font-family: 'Mochiy Pop One', sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     color: #FFF;
 }
@@ -37,25 +63,71 @@
     align-items: center;
 }
 
-.cityCardsHeader > div > img {
-    width: 26px;
-    height: 26px;
+.cityCardsWeatherIcon > img {
+    width: 20px;
+    height: 20px;
 }
 
 .cityCardsHeader > div > span {
     text-align: center;
     font-family: 'Mochiy Pop One', sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
-    color: rgba(225, 225, 225, 70%);
+    color: rgba(225, 225, 225, 80%);
     margin-top: 5px;
 }
 
-.cityCardsHeaderWeather {
-    width: 130px;
-    height: 100px;
-    background-color: rgba(0,0, 0, 50%);
+.cityCardsBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.cityCardsBottom > img {
+    width: 28px;
+    height: 28px;
     position: absolute;
     bottom: 20px;
+    right: 20px;
+    z-index: 2;
+}
+.cityCardsHeaderWeather {
+    width: 180px;
+    height: fit-content;
     border-radius: 10px;
+    padding: 10px;
+    position: absolute;
+    bottom: 20px;
+}
+
+.cityCardsHeaderWeather > p  {
+    text-align: center;
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: rgba(225, 225, 225, 100%);
+    margin-top: 10px;
+    text-align: left;
+    line-height: 0;
+}
+
+.cityCardsHeaderWeather > h1 {
+    text-align: center;
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: rgba(225, 225, 225, 80%);
+    margin-top: 40px;
+    text-align: left;
+    line-height: 0;
+}
+.cityCardsHeaderWeather > h2 {
+    text-align: center;
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(225, 225, 225, 60%);
+    margin-top: 30px;
+    text-align: left;
+    line-height: 0;
 }

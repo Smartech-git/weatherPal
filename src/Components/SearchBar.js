@@ -111,7 +111,7 @@ function SearchBar(props) {
 
 
     return (
-            <div className="SearchBarContainer">
+            <div className="SearchBarContainer" style={{backgroundColor: state.themeHue.primary}}>
                 <div className={`ArrowRipple ${leftArrowActive}`}>
                     <Ripples color={'rgba(0,0,0, 0.15)'}>
                         <div style={{backgroundColor: state.themeHue.primary_light}} className={`ArrowLeftPadding ArrowIcons-${state.theme}`}>

@@ -3,14 +3,12 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
 const defaultSettings = {
-  theme : 'Light',
-  highlights: [],
-  favourites: []
+  theme : 'Auto',
 }
 
-// if(localStorage.getItem("settings") === null){
-//   localStorage.setItem("settings", JSON.stringify(defaultSettings));
-// }
+if(localStorage.getItem("settings") === null){
+  localStorage.setItem("settings", JSON.stringify(defaultSettings));
+}
 
 const firebaseConfig = {
   apiKey: "AIzaSyDviET9nQEE6yyuyATiiYeBxEhWlEpZF7o",
@@ -26,7 +24,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 
-const cities = [
+export const cities = [
   "Beijing",
   "Buenos Aires",
   "Cairo",
@@ -46,48 +44,43 @@ const cities = [
 
 
 
-export const setSettings = (param) => {
-  localStorage.setItem("settings", JSON.stringify(param));
-  let data = getSettings() 
+export const setSettings = (param, data) => {
+  localStorage.setItem(param, JSON.stringify(data));
 }
 
 
-export const getSettings = () => {
-  let settings =  localStorage.getItem("settings")
+export const getSettings = (param) => {
+  let settings =  localStorage.getItem(param)
   return JSON.parse(settings);
   
 }
 
-export const getLocationdata = () => {
+export const getLocationdata = async (param) => {
   
-    if(1 ){
-      let citiesData = []
-      cities.forEach((city) => {
-        const params = {
-          key: 'e724a77e072d428ea6a21539233010',
-          q: city,
-          format: 'json'
-        }
-        
-        axios.get(' https://api.worldweatheronline.com/premium/v1/weather.ashx', {params})
-          .then(response => {
-            const apiResponse = response.data.data;
-            let data = {
-              current_condition: apiResponse.current_condition[0],
-              request: apiResponse.request[0],
-              weather: apiResponse.weather[0]
-            }
-            citiesData.push(data)
-          }).catch(error => {
-            console.log(error);
-          })
-      })
-      let prevSettings =  getSettings()
-      prevSettings['highlights'] = citiesData
-      let newSettings = Object.assign(prevSettings)
-      console.log(newSettings)
-      setSettings(newSettings)
-     
+  let citiesData = []
+  cities.forEach((city) => {
+    let data = {}
+    const params = {
+      key: 'e724a77e072d428ea6a21539233010',
+      q: city,
+      format: 'json'
     }
+    
+    axios.get(' https://api.worldweatheronline.com/premium/v1/weather.ashx', {params})
+      .then(response => {
+        const apiResponse = response.data.data;
+        data = {
+          current_condition: apiResponse.current_condition[0],
+          request: apiResponse.request[0],
+          weather: apiResponse.weather[0]
+        }
+        citiesData.push(data)
+      }).catch(error => {
+        console.log(error);
+      })
+  })
+
+  param(citiesData)
+     
 
 }

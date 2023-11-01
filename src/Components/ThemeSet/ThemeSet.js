@@ -13,7 +13,6 @@ export default function Themeset() {
     const [state, dispatch] = useStateValue();
     const [showDropDown, setDropDown] = useState("none");
     const [themeValue, setThemeValue] = useState();
-    const [settings, {}] = useState(getSettings("settings"))
     const isDarkTheme = useThemeDetector();
 
     const handleDropDown = () => {
@@ -39,15 +38,13 @@ export default function Themeset() {
                 dispatch(action); 
             }
             let newSettings = {
-                ...settings,
                 theme: "Auto",
             }
-            setSettings( newSettings)
+            setSettings("settings", newSettings)
         }
 
         if(theme === 'DARK'){
             let newSettings = {
-                ...settings,
                 theme: "Dark",
             }
 
@@ -57,15 +54,14 @@ export default function Themeset() {
             }
             dispatch(action);
 
-            setSettings(newSettings)
+            setSettings('settings', newSettings)
         }
 
         if(theme === 'LIGHT') {
             let newSettings = {
-                ...settings,
                 theme: "Light",
             }
-            setSettings(newSettings)
+            setSettings("settings", newSettings)
             const action = {
                 type: actionTypes.setTheme,
                 theme: 'Light'
