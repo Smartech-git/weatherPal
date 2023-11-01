@@ -5,6 +5,8 @@ import Ripples from 'react-ripples';
 import {ReactComponent as ArrowLeft} from '../Assets/ArrowLeft.svg';
 import WBG from '../Assets/WBG.png'
 import humidity from '../Assets/humidity.png'
+import wind from '../Assets/wind.png'
+import uv from '../Assets/uv.png'
 
 export default function SearchedCityCard(props) {
   const [state, dispatch] = useStateValue()
@@ -41,7 +43,18 @@ export default function SearchedCityCard(props) {
                   <span>USA</span>
               </div>
               <div className='content-weather'>
-
+                <div>
+                  <img src={humidity}></img>
+                  <span>7%</span>
+                </div>
+                <div>
+                  <img src={wind}></img>
+                  <span>34km/h</span>
+                </div>
+                <div>
+                  <img src={uv}></img>
+                  <span>7%</span>
+                </div>
               </div>
             </div>
           </div>
