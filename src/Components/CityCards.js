@@ -49,7 +49,7 @@ export default function CityCards(props) {
 
   return (
       <div ref={ref} className={`cityCards cityCards_${inView}`} style={{backgroundColor: state.themeHue.primary_light}}>
-        <div onClick={handleNavigation}>
+        <div>
           <div className='cityCardsHeader'>
             <span style={{color: state.theme === "Light" ? 'rgba(0,0,0, 80%)' : 'rgba(225, 225, 225, 70%)'}}>{current_condition.observation_time}</span>
             <div>
@@ -60,8 +60,8 @@ export default function CityCards(props) {
               <span style={{color: state.theme === "Light" ? 'rgba(0,0,0, 80%)' : 'rgba(225, 225, 225, 70%)'}}>{current_condition.weatherDesc[0].value}</span>
             </div>
           </div>
-          <div className='cityCardsBottom'>
-            <div className='cityCardsHeaderWeather' style={{backgroundColor:  'rgba(0,0,0, 10%)'}} >
+          <div  className='cityCardsBottom'>
+            <div onClick={handleNavigation} className='cityCardsHeaderWeather' style={{backgroundColor:  'rgba(0,0,0, 10%)'}} >
               <p style={{color: state.themeHue.base}}>{current_condition.temp_C}<sup>0</sup>C</p>
               <h1 style={{color: state.themeHue.base}}>{request.query.split(' ')[0]}</h1>
               <h2 style={{color: state.theme === "Light" ? 'rgba(0,0,0, 70%)' : 'rgba(225, 225, 225, 70%)'}}>{request.query.split(' ')[1]}</h2>

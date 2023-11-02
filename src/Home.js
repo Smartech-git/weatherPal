@@ -23,6 +23,10 @@ function Home(props) {
     const [viewMore, setViewMore] = useState(false)
 
     useEffect(() => {
+        if(getSettings('highlights') === null) {
+            return
+        }
+
         let arr = getSettings('highlights').highlights
         arr.sort((a, b) => {
             const A = a.request.query.toUpperCase();

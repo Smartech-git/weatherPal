@@ -65,7 +65,7 @@ export const citiesData = []
     console.log("active") 
     cities.forEach((city) => {
       const params = {
-        key: process.env.REACT_APP_WEATHERSTACK_API_KEY,
+        key: 'e724a77e072d428ea6a21539233010',
         q: city,
         format: 'json'
       }
