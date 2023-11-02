@@ -44,6 +44,7 @@ export default function CityCards(props) {
 
   const handleNavigation = () => {
     props.setViewMore(true)
+    props.setViewMoreDetails(props.data)
   }
 
 

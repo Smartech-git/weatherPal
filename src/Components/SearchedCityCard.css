@@ -63,7 +63,19 @@
     font-weight: 400;
     color: rgba(225, 225, 225, 100%);
     line-height: 0;
+    animation: tempFade 0.8s ease forwards;
+    transform: translateY(40px);
+    opacity: 0;
 }
+
+@keyframes tempFade {
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+}
+
 .content-temp > p:nth-child(2) {
     text-align: center;
     font-family: 'Mochiy Pop One', sans-serif;
@@ -72,6 +84,9 @@
     color: rgba(225, 225, 225, 70%);
     line-height: 0px;
     margin-top: -5px;
+    animation: tempFade 0.8s ease 0.4s forwards;
+    transform: translateY(20px);
+    opacity: 0;
 }
 
 .content-bottom {
@@ -96,7 +111,7 @@
 .content-cityName > p {
     text-align: center;
     font-family: 'Mochiy Pop One', sans-serif;
-    font-size: 34px;
+    font-size: 40px;
     font-weight: 400;
     color: rgba(225, 225, 225, 100%);
     line-height: 0px;
@@ -109,26 +124,46 @@
     font-weight: 400;
     color: rgba(225, 225, 225, 50%);
     line-height: 0px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .content-weather {
-    margin-left: 80px;
+    margin-left: 60px;
     display: flex;
 }
 .content-weather > div {
     display: flex;
     flex-direction: column;
-     align-items: center;
-     margin: 20px;
+    align-items: center;
+    padding:  20px 10px 20px 10px;
+    border-left: 1px solid  rgba(225, 225,225, 30%);
+    border-right: 1px solid rgba(225,225,225, 30%);
+    animation: detailsFade 0.8s ease 0.8s forwards;
+    opacity: 0;
+}
+
+@keyframes detailsFade {
+    to{
+        opacity: 1;
+        padding: 20px;
+    }
 }
 
 .content-weather > div > img {
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
+}
+.content-weather > div > span:nth-child(1) {
+    text-align: center;
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(225, 225, 225, 100%);
+    line-height: 0px;
+    margin-bottom: 20px;
 }
 
-.content-weather > div > span {
+.content-weather > div > span:nth-child(3) {
     text-align: center;
     font-family: 'Mochiy Pop One', sans-serif;
     font-size: 18px;
@@ -136,4 +171,13 @@
     color: rgba(225, 225, 225, 70%);
     line-height: 0px;
     margin-top: 50px;
+}
+
+.contentViewMore-heart {
+    width: 38px;
+    height: 38px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
 }

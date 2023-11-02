@@ -52,7 +52,6 @@
     width: 100%;
     height: fit-content;
     column-gap: 5px;
-    row-gap: 10px;
     animation: spread 0.6s ease 1s forwards;
     opacity: 0;
     overflow-x: scroll;

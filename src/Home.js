@@ -21,6 +21,7 @@ function Home(props) {
     const [fav, setFav] = useState([])
     const [highlights, setHighlights] = useState([])
     const [viewMore, setViewMore] = useState(false)
+    const [viewMoreDetails, setViewMoreDetails] = useState()
 
     useEffect(() => {
         if(getSettings('highlights') === null) {
@@ -121,7 +122,7 @@ function Home(props) {
                                 <img src={cancel_dark} alt="icon"/>
                             )}
                         </div>
-                     </div>
+                    </div>
                    
                     <div className='favourite-content'>
                         {
@@ -156,20 +157,13 @@ function Home(props) {
                         <div>
                             { highlights.map((item, index) => {
                                 return (
-                                    <CityCards setViewMore={setViewMore} key={index} fav = {fav} setFav={setFav} data={item}/>
+                                    <CityCards setViewMoreDetails={setViewMoreDetails} setViewMore={setViewMore} key={index} fav = {fav} setFav={setFav} data={item}/>
                                 )
                             })}
-                            {/* <CityCards fav = {fav} city="Tokyo" setFav={setFav}/>
-                            <CityCards fav = {fav} city="Beijing" setFav={setFav}/>
-                            <CityCards fav = {fav} city ="Paris" setFav={setFav}/>
-                            <CityCards fav = {fav} city = "New york" setFav={setFav}/>
-                            <CityCards fav = {fav} city="Owerri" setFav={setFav}/>
-                            <CityCards fav = {fav} city="London" setFav={setFav}/>
-                            <CityCards fav = {fav} city="France" setFav={setFav}/> */}
                         </div>
                     </div> 
                     ) : (
-                       <SearchedCityCard setViewMore={setViewMore}/> 
+                       <SearchedCityCard data={viewMoreDetails} fav = {fav} setFav={setFav} setViewMore={setViewMore}/> 
                     )
                 }
             </div>
