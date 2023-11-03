@@ -12,6 +12,7 @@ import { getHighlightsWeatherData } from './APIs';
 import cancel_dark from '../src/Assets/cancel_dark.png'
 import cancel_light from '../src/Assets/cancel_light.png'
 import SearchedCityCard from './Components/SearchedCityCard';
+import axios from "axios";
 
 //localStorage.clear()
 function Home(props) {
@@ -21,7 +22,7 @@ function Home(props) {
     const [fav, setFav] = useState([])
     const [highlights, setHighlights] = useState([])
     const [viewMore, setViewMore] = useState(false)
-    const [viewMoreDetails, setViewMoreDetails] = useState()
+    const [viewMoreDetails, setViewMoreDetails] = useState(undefined)
 
     useEffect(() => {
         if(getSettings('highlights') === null) {
@@ -88,6 +89,30 @@ function Home(props) {
 
     }, [])
 
+    const handleAPIcall = (value) => {
+        setViewMore(true)
+        const params = {
+            key: 'e724a77e072d428ea6a21539233010',
+            q: value,
+            format: 'json'
+          }
+          
+          axios.get(' https://api.worldweatheronline.com/premium/v1/weather.ashx', {params})
+            .then(response => {
+              const apiResponse = response.data.data;
+              let data = {
+                current_condition: apiResponse.current_condition[0],
+                request: apiResponse.request[0],
+                weather: apiResponse.weather[0]
+              }
+
+              setViewMoreDetails(data)
+
+            }).catch(error => {
+              console.log(error);
+            })
+    }
+
     const handleFavouriteDeletion = (city) => {
         let arr = fav.filter((item) => item !== city )
         setFav(arr)
@@ -107,7 +132,7 @@ function Home(props) {
         <div style={{backgroundColor: state.themeHue.primary, width: '100%'}}>
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <Header/>
-            <SearchBar/>
+            <SearchBar setViewMore={setViewMore} setViewMoreDetails={setViewMoreDetails}/>
             <div className='homeInnerContent'>
                 <div style={{backgroundColor: state.themeHue.primary_light}} className="homeInnerContent-favourite">
                     <div>
@@ -130,7 +155,7 @@ function Home(props) {
                             fav.map((item, index) => {
                                 return (
                                    <div className='favouriteCities' key ={index}>
-                                        <div className="favouriteCities-lookup">
+                                        <div onClick={() => {handleAPIcall(item)}} className="favouriteCities-lookup">
                                             <span style={{color: state.themeHue.base}}>{item}</span>
                                         </div> 
                                         <div className="favouriteCities-remove" onClick={() => handleFavouriteDeletion(item)} style={{backgroundColor: state.themeHue.primary}}>
@@ -162,9 +187,12 @@ function Home(props) {
                             })}
                         </div>
                     </div> 
-                    ) : (
+                    ) : 
+                        viewMoreDetails === undefined ? (
+                            <div className='searchedCityCard' style={{display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: state.themeHue.primary_light}}><h1 className='viewMoreLoading'>Loadings...</h1></div>
+                        ) : (
                        <SearchedCityCard data={viewMoreDetails} fav = {fav} setFav={setFav} setViewMore={setViewMore}/> 
-                    )
+                        )
                 }
             </div>
             <ThemeSetMobile/>

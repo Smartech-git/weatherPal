@@ -153,7 +153,7 @@
     width: 34px;
     height: 34px;
 }
-.content-weather > div > span:nth-child(1) {
+.content-weather > div > span:nth-child(1), .viewMoreLoading {
     text-align: center;
     font-family: 'Mochiy Pop One', sans-serif;
     font-size: 14px;
