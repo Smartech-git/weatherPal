@@ -11,7 +11,7 @@ import CityCards from './Components/CityCards';
 import { getHighlightsWeatherData } from './APIs';
 import cancel_dark from '../src/Assets/cancel_dark.png'
 import cancel_light from '../src/Assets/cancel_light.png'
-import SearchedCityCard from './Components/searchedCityCard';
+import SearchedCityCard from './Components/SearchedCityCard';
 import axios from "axios"
 
 //localStorage.clear()
