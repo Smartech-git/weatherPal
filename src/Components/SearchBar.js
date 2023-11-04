@@ -35,7 +35,7 @@ function SearchBar(props) {
               props.setViewMoreDetails(data)
 
             }).catch(error => {
-              console.log(error);
+                props.setViewMoreDetails("ERROR")
             })
     }
 

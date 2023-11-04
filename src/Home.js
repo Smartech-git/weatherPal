@@ -11,8 +11,8 @@ import CityCards from './Components/CityCards';
 import { getHighlightsWeatherData } from './APIs';
 import cancel_dark from '../src/Assets/cancel_dark.png'
 import cancel_light from '../src/Assets/cancel_light.png'
-import SearchedCityCard from './Components/SearchedCityCard';
-import axios from "axios";
+import SearchedCityCard from './Components/searchedCityCard';
+import axios from "axios"
 
 //localStorage.clear()
 function Home(props) {
@@ -109,7 +109,7 @@ function Home(props) {
               setViewMoreDetails(data)
 
             }).catch(error => {
-              console.log(error);
+                setViewMoreDetails("ERROR")
             })
     }
 
@@ -188,8 +188,8 @@ function Home(props) {
                         </div>
                     </div> 
                     ) : 
-                        viewMoreDetails === undefined ? (
-                            <div className='searchedCityCard' style={{display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: state.themeHue.primary_light}}><h1 className='viewMoreLoading'>Loadings...</h1></div>
+                       (viewMoreDetails === undefined || viewMoreDetails === "ERROR") ? (
+                            <div className='searchedCityCard' style={{display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: state.themeHue.primary_light}}>{viewMoreDetails === undefined ? <h1 className='viewMoreLoading'>Loading . . .</h1> : <h1 className='viewMoreLoading'>Can't fetch data at the moment &#129402;</h1>}</div>
                         ) : (
                        <SearchedCityCard data={viewMoreDetails} fav = {fav} setFav={setFav} setViewMore={setViewMore}/> 
                         )

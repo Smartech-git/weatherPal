@@ -59,8 +59,6 @@ export const getSettings = (param) => {
 }
 
 export const citiesData = []
-
-  if(getSettings("highlights") === null ){
     console.log("active") 
     cities.forEach((city) => {
       const params = {
@@ -91,7 +89,8 @@ export const citiesData = []
             setSettings("highlights", newSetting)
           }
         }).catch(error => {
-          console.log(error);
+          if(error){
+           
+          }
         })
     })
-  }
