@@ -11,8 +11,6 @@ function SearchBar(props) {
 
     const [state, dispatch] = useStateValue();
     const [value, setValue] = useState('');
-    const [leftArrowActive, setLeftArrowActive] = useState(false);
-    const [rightArrowActive, setRightArrowActive] = useState(false);
 
     const handleAPIcall = () => {
         props.setViewMore(true)
