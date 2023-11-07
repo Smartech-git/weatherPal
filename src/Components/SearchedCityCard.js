@@ -15,7 +15,9 @@ import { getSettings, setSettings } from '../APIs';
 
 export default function SearchedCityCard(props) {
   const [state, dispatch] = useStateValue()
-  const {current_condition, request, weather} = props.data
+  const current_condition = props.data ? props.data.current_condition : ''
+  const request = props.data ? props.data.request : ''
+  const weather = props.data ? props.data.weather : ''
 
   const hangdleNavigation = () => {
     props.setViewMore(false)
@@ -57,55 +59,61 @@ const handleAddToFavourite = () => {
             </Ripples>
         </div>
       </div>
-      <div className='searchedCityCard-content' style={{ backgroundImage: `url(${WBG})`, backgroundColor: state.themeHue.primary_light}}>
-          <div>
-            <div className='cityCardContent-header'>
-                <span>{current_condition.observation_time}</span>
-                <div className='content-temp'>
-                  <p>{current_condition.temp_C}<sup>0</sup>C</p>
-                  <p>{current_condition.weatherDesc[0].value}</p>
+      {
+        (props.error || props.data === undefined)? (
+          <div className='searchedCityCard' style={{display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: state.themeHue.primary_light}}>{props.data === undefined ? <h1 className='viewMoreLoading'>Loading . . .</h1> : <h1 className='viewMoreLoading'>Can't fetch data at the moment &#129402;</h1>}</div>
+        ) : (
+          <div className='searchedCityCard-content' style={{ backgroundImage: `url(${WBG})`, backgroundColor: state.themeHue.primary_light}}>
+              <div>
+                <div className='cityCardContent-header'>
+                    <span>{current_condition.observation_time}</span>
+                    <div className='content-temp'>
+                      <p>{current_condition.temp_C}<sup>0</sup>C</p>
+                      <p>{current_condition.weatherDesc[0].value}</p>
+                    </div>
+                    <span>{weather.date}</span>
                 </div>
-                <span>{weather.date}</span>
-            </div>
 
-            <div className="content-bottom">
-              <div className='content-cityName'>
-                  <p>{request.query.split(' ')[0]}</p>
-                  <span>{request.query.split(' ')[1]}</span>
-              </div>
-              <div className='content-weather'>
-                <div>
-                  <span>Humidity</span>
-                  <img src={humidity}></img>
-                  <span>{`${current_condition.humidity}%`}</span>
+                <div className="content-bottom">
+                  <div className='content-cityName'>
+                      <p>{request.query.split(' ')[0]}</p>
+                      <span>{request.query.split(' ')[1]}</span>
+                  </div>
+                  <div className='content-weather'>
+                    <div>
+                      <span>Humidity</span>
+                      <img src={humidity}></img>
+                      <span>{`${current_condition.humidity}%`}</span>
+                    </div>
+                    <div>
+                    <span>Wind Speed</span>
+                      <img src={wind}></img>
+                      <span>{`${current_condition.windspeedKmph}Kmph`}</span>
+                    </div>
+                    <div>
+                      <span>UV index</span>
+                      <img src={uv}></img>
+                      <span>{current_condition.uvIndex}</span>
+                    </div>
+                    <div>
+                      <span>Cloud Cover</span>
+                      <img src={cloud}></img>
+                      <span>{`${current_condition.cloudcover}%`}</span>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                <span>Wind Speed</span>
-                  <img src={wind}></img>
-                  <span>{`${current_condition.windspeedKmph}Kmph`}</span>
-                </div>
-                <div>
-                  <span>UV index</span>
-                  <img src={uv}></img>
-                  <span>{current_condition.uvIndex}</span>
-                </div>
-                <div>
-                  <span>Cloud Cover</span>
-                  <img src={cloud}></img>
-                  <span>{`${current_condition.cloudcover}%`}</span>
-                </div>
-              </div>
-            </div>
 
-            {
-              handleCheckForFavourites() ? (
-                <img className='contentViewMore-heart' src={heart} alt ="heart"/>
-              ) : (
-                <img className='contentViewMore-heart' src={heart_dark} alt ="heart" onClick={handleAddToFavourite}/>
-              )
-            }
+                {
+                  handleCheckForFavourites() ? (
+                    <img className='contentViewMore-heart' src={heart} alt ="heart"/>
+                  ) : (
+                    <img className='contentViewMore-heart' src={heart_dark} alt ="heart" onClick={handleAddToFavourite}/>
+                  )
+                }
+              </div>
           </div>
-      </div>
+        )
+      }
     </div>
   )
 }

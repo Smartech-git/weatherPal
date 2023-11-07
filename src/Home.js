@@ -1,14 +1,13 @@
-import React, {useEffect,useState, img} from 'react';
+import React, {useEffect,useState } from 'react';
 import Header from './Components/Header';
 import SearchBar from './Components/SearchBar';
 import './Home.css';
 import { actionTypes } from './Reducer';
-import { getLocationdata, getSettings, setSettings } from './APIs';
+import { getSettings, setSettings } from './APIs';
 import { useThemeDetector } from './CustomHooks/useThemeDetector';
 import ThemeSetMobile from './Components/ThemeSetMobile/ThemeSetMobile';
 import { useStateValue } from './StateProvider';
 import CityCards from './Components/CityCards';
-import { getHighlightsWeatherData } from './APIs';
 import cancel_dark from '../src/Assets/cancel_dark.png'
 import cancel_light from '../src/Assets/cancel_light.png'
 import SearchedCityCard from './Components/SearchedCityCard';
@@ -18,7 +17,6 @@ import axios from "axios"
 function Home(props) {
     const [state, dispatch] = useStateValue();
     const isDarkTheme = useThemeDetector();
-    const [data, setData] = useState(undefined)
     const [fav, setFav] = useState([])
     const [highlights, setHighlights] = useState([])
     const [viewMore, setViewMore] = useState(false)
@@ -92,7 +90,7 @@ function Home(props) {
     const handleAPIcall = (value) => {
         setViewMore(true)
         const params = {
-            key: 'e724a77e072d428ea6a21539233010',
+            key: process.env.REACT_APP_WEATHERSTACK_API_KEY,
             q: value,
             format: 'json'
           }
@@ -132,7 +130,7 @@ function Home(props) {
         <div style={{backgroundColor: state.themeHue.primary, width: '100%'}}>
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <Header/>
-            <SearchBar setViewMore={setViewMore} setViewMoreDetails={setViewMoreDetails}/>
+            <SearchBar setData ={setViewMoreDetails} setViewMore={setViewMore} setViewMoreDetails={setViewMoreDetails}/>
             <div className='homeInnerContent'>
                 <div style={{backgroundColor: state.themeHue.primary_light}} className="homeInnerContent-favourite">
                     <div>
@@ -189,9 +187,10 @@ function Home(props) {
                     </div> 
                     ) : 
                        (viewMoreDetails === undefined || viewMoreDetails === "ERROR") ? (
-                            <div className='searchedCityCard' style={{display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: state.themeHue.primary_light}}>{viewMoreDetails === undefined ? <h1 className='viewMoreLoading'>Loading . . .</h1> : <h1 className='viewMoreLoading'>Can't fetch data at the moment &#129402;</h1>}</div>
+                            <SearchedCityCard error ={true} data={viewMoreDetails} fav = {fav} setFav={setFav} setViewMore={setViewMore}/> 
+
                         ) : (
-                       <SearchedCityCard data={viewMoreDetails} fav = {fav} setFav={setFav} setViewMore={setViewMore}/> 
+                            <SearchedCityCard error={false} data={viewMoreDetails} fav = {fav} setFav={setFav} setViewMore={setViewMore}/> 
                         )
                 }
             </div>

@@ -5,7 +5,6 @@ import {ReactComponent as ArrowLeft} from '../Assets/ArrowLeft.svg';
 import {ReactComponent as ArrowRight} from '../Assets/ArrowRight.svg';
 import Ripples from 'react-ripples';
 import {useStateValue} from '../StateProvider';
-import {actionTypes} from '../Reducer'
 import axios from "axios";
 
 function SearchBar(props) {
@@ -17,8 +16,9 @@ function SearchBar(props) {
 
     const handleAPIcall = () => {
         props.setViewMore(true)
+        props.setData(undefined)
         const params = {
-            key: 'e724a77e072d428ea6a21539233010',
+            key: process.env.REACT_APP_WEATHERSTACK_API_KEY,
             q: value,
             format: 'json'
           }
@@ -31,7 +31,6 @@ function SearchBar(props) {
                 request: apiResponse.request[0],
                 weather: apiResponse.weather[0]
               }
-
               props.setViewMoreDetails(data)
 
             }).catch(error => {

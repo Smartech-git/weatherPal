@@ -25,7 +25,6 @@ if(localStorage.getItem("settings") === null){
   localStorage.setItem("settings", JSON.stringify(defaultSettings));
 }
 
-let clear = true
 
 export const cities = [
   "Beijing",
@@ -62,7 +61,7 @@ export const citiesData = []
 
     cities.forEach((city) => {
       const params = {
-        key: 'e724a77e072d428ea6a21539233010',
+        key: process.env.REACT_APP_WEATHERSTACK_API_KEY,
         q: city,
         format: 'json'
       }
@@ -82,7 +81,6 @@ export const citiesData = []
             setSettings("highlights", newSetting)
           }else {
             let x = getSettings("highlights")
-            console.log(x)
             if(x.highlights.find((item) => item.request.query === data.request.query) === undefined){
               let newSetting = {
                 highlights: [ ...x.highlights, data]
