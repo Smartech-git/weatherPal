@@ -61,7 +61,7 @@ const handleAddToFavourite = () => {
       </div>
       {
         (props.error || props.data === undefined)? (
-          <div className='searchedCityCard' style={{display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: state.themeHue.primary_light}}>{props.data === undefined ? <h1 className='viewMoreLoading'>Loading . . .</h1> : <h1 className='viewMoreLoading'>Can't fetch data at the moment &#129402;</h1>}</div>
+          <div className='searchedCityCard' style={{display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: state.themeHue.primary_light}}>{props.data === undefined ? <h1 style ={{ color: state.themeHue.primary }} className='viewMoreLoading'>Loading . . .</h1> : <h1 style ={{ color: state.themeHue.primary }} className='viewMoreLoading'>Can't fetch data at the moment &#129402;</h1>}</div>
         ) : (
           <div className='searchedCityCard-content' style={{ backgroundImage: `url(${WBG})`, backgroundColor: state.themeHue.primary_light}}>
               <div>
